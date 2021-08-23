@@ -1,0 +1,38 @@
+.backgroundImage {
+  Position:fixed;
+  Top: 0;
+  left: 0%;
+  /* Width: 100vh; */
+  /* Height: 100vmin; */
+  Opacity: 0.35;
+  Z-index: -5000;
+}
+
+.backgroundImage img {
+  width:100vw;
+  height: 135vh;
+  object-fit: cover;
+}
+
+body{
+  margin: 0;
+}
+
+
+
+.fixed-footer{
+  width: 100%;
+  position: fixed;        
+  background: #7a7a7a;
+  padding: .3rem;
+  margin-left: -.6rem;
+  color: #FF9900;
+  bottom: 0;
+  vertical-align: top;
+}
+
+.fixed-footer img {
+  height: 1.3rem;
+  vertical-align: bottom;
+  padding: 0 2px;
+}
