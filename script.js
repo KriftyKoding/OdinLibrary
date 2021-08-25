@@ -17,6 +17,19 @@ function addBookToLibrary() {
 
 function addBookSubmit() {
     console.log("add book submit");
+    let title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let page = document.getElementById("page").value;
+    let statusRead = document.getElementById("have-read").checked ;
+    let statusNotRead = document.getElementById("have-not-read").checked ;
+
+    console.log(title);
+    console.log(author);
+    console.log(page);
+    console.log(statusRead);
+    console.log(statusNotRead);
+
+
 }
 
 //test array
