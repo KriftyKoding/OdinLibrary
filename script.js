@@ -1,5 +1,6 @@
 let myLibray = []
 
+
 function Book(title, author, page, read) {
     this.title = title;
     this.author = author;
@@ -11,7 +12,11 @@ function Book(title, author, page, read) {
 }
 
 function addBookToLibrary() {
-    console.log("add book")
+    console.log("add book");
+}
+
+function addBookSubmit() {
+    console.log("add book submit");
 }
 
 //test array

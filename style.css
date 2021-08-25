@@ -18,6 +18,10 @@ body{
   margin: 0;
 }
 
+#add-book{
+  white-space: pre; 
+}
+
 
 
 .fixed-footer{
