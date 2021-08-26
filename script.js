@@ -1,7 +1,6 @@
 let myLibray = []
-let bookNum = 0
 
-
+//////////book object constructor//////
 function Book(title, author, page, read) {
     this.title = title;
     this.author = author;
@@ -12,10 +11,14 @@ function Book(title, author, page, read) {
     }
 }
 
+//////////add book button//////////
 function addBookToLibrary() {
     console.log("add book");
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////Form input create book object///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function addBookSubmit() {
     let readstatus = "blank"
     const title = document.getElementById("title").value;
@@ -29,4 +32,29 @@ function addBookSubmit() {
 
     let book =  new Book(title, author, page, readstatus)
     myLibray.push(book)
+    
+    displayLibrary();
 }
+
+//////////test book object//////////
+let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not yet read')
+let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 'not yet read')
+let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 'not yet read')
+myLibray.push(theHobbit)
+myLibray.push(theHobbit2)
+myLibray.push(theHobbit3)
+
+
+//////////create book list//////////
+const bookList = document.querySelector("#book-list")
+displayLibrary();
+function displayLibrary(){
+    myLibray.forEach(function(book) {
+        const content = document.createElement('div');
+        content.classList.add('booklist');
+        content.textContent = book.info();
+        bookList.appendChild(content);
+    });
+}
+
+//////////remove book list//////////
