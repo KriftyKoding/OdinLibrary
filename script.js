@@ -33,6 +33,7 @@ function addBookSubmit() {
     let book =  new Book(title, author, page, readstatus)
     myLibray.push(book)
     
+    removeLibrary()
     displayLibrary();
 }
 
@@ -58,3 +59,6 @@ function displayLibrary(){
 }
 
 //////////remove book list//////////
+function removeLibrary(){
+    bookList.innerHTML = ""
+}
