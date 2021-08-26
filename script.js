@@ -60,24 +60,64 @@ displayLibrary();
 function displayLibrary(){
     removeLibrary();
     myLibray.forEach(function(book) {
-        const atrributeID = "book" + bookCount;
+        const atrributeID = bookCount;
         bookCount++
-        const content = document.createElement('div');
-        content.classList.add('booklist');
-        content.setAttribute('id', atrributeID);
-        content.textContent = book.info();
-        bookList.appendChild(content);
+        const bookInfo = document.createElement('div');
+        bookInfo.classList.add('booklist');
+        bookInfo.setAttribute('id', atrributeID);
+        // bookInfo.textContent = book.info();
+
+        const title = document.createElement('div');
+        title.textContent = book.title;
+        title.classList.add('title');
+        bookInfo.appendChild(title);
+
+        const author = document.createElement('div');
+        author.textContent = book.author;
+        author.classList.add('author');
+        bookInfo.appendChild(author);
+        
+        const page = document.createElement('div');
+        page.textContent = book.page;
+        page.classList.add('page');
+        bookInfo.appendChild(page);
+
+        const readStatus = document.createElement('INPUT');
+        readStatus.setAttribute("type", "range")
+        readStatus.setAttribute("min", "0")
+        readStatus.setAttribute("max", "100")
+        // add inut type
+        readStatus.classList.add('readStatus');
+        bookInfo.appendChild(readStatus);
+        
+        const readStatusLabel = document.createElement('Label');
+        readStatusLabel.textContent = "Amount Read";
+        readStatusLabel.classList.add('readStatus');
+        bookInfo.appendChild(readStatusLabel);
+
+        
+        const deleteBook = document.createElement('BUTTON');
+        deleteBook.setAttribute("type", "button")
+        deleteBook.setAttribute("onclick", `removeBook(${atrributeID})`)
+        bookInfo.classList.add(atrributeID);
+        // console.log(atrributeID);
+        deleteBook.textContent = 'Delete Book';
+        deleteBook.classList.add('deleteBook');
+        bookInfo.appendChild(deleteBook);
+
+            
+        bookList.appendChild(bookInfo);
     });
 }
 
 //////////remove book list//////////
 function removeLibrary(){
     bookList.innerHTML = ""
+    bookCount = 0
 }
 
 //////////remove book from array//////////
-function removeBook(){
-    // delete myLibray[1]
-    myLibray.splice(1, 1);
+function removeBook(num){
+    myLibray.splice(num, 1);
     displayLibrary();
 }
