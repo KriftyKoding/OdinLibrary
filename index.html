@@ -27,11 +27,9 @@
                 <label for="author">Author</label>
                 <input type="text" id="author">
                 <label for="page">Number of Pages</label>
-                <input type="number" name="" id="page">
-                <input type="radio" id="have-read" name="read" value="have">
-                <label for="have-read">have-read</label>
-                <input type="radio" id="have-not-read" name="read" value="have-not">
-                <label for="have-not-read">have-not-read</label>
+                <input type="number" name="" id="page" onchange="pageNumberChange(this.value)">
+                <input type="range" min="0" max="100" value="0" id="readPercentValue" oninput="rangeValue(this.value)">
+                <label for="range" id="readPercent">0%</label>
                 <input type="submit" value="Submit" onclick="addBookSubmit()">
             </section>
 
