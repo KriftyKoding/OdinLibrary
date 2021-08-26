@@ -2,6 +2,15 @@ let myLibray = []
 let bookCount = 0
 const bookList = document.querySelector("#book-list")
 
+
+////////// test books //////////
+let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
+let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
+let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
+myLibray.push(theHobbit)
+myLibray.push(theHobbit2)
+myLibray.push(theHobbit3)
+displayLibrary();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Book object constructor /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,13 +39,12 @@ function pageNumberChange(num) {
 }
 
 ////////// Activate by Read Status Change//////////
-function readStatusChange(val) {
+function rangeValue(val) {
     if (document.getElementById('page').value == '') {
         document.getElementById("readPercent").innerHTML = val + "%";
     } else {
         document.getElementById("readPercent").innerHTML = val + " pages";
     }
-    
 }
 
 //////////remove book list//////////
@@ -50,39 +58,25 @@ function removeBook(num){
     myLibray.splice(num, 1);
     displayLibrary();
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Form input - New Book add to Array/////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function addBookSubmit() {
-    // let readstatus = "read status unknown"
     const title = document.getElementById("title").value;
     let author = document.getElementById("author").value;
     let page = document.getElementById("page").value;
-    let percentRead = document.getElementById("readPercentValue").value
+    let read = document.getElementById("readPercentValue").value
         
     if (title == "") {return};
-    if (author == "") {author = "author unknown"};
-    if (page == "") {page = "unknown"};
+    if (author == "") {"author unknown"};
+    if (page == "") {"Legth unknown"};
 
-    let book =  new Book(title, author, page, percentRead)
-    console.log(percentRead) + `ercent`;
+    let book =  new Book(title, author, page, read)
     myLibray.push(book)
     
     displayLibrary();
 }
-
-
-
-////////// test book //////////
-let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
-let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
-let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
-myLibray.push(theHobbit)
-myLibray.push(theHobbit2)
-myLibray.push(theHobbit3)
-displayLibrary();
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Book List Display ????????????????/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,13 +105,13 @@ function displayLibrary(){
         page.classList.add('page');
         
         //////////// READ STATUS ////////////
-        const readStatus = document.createElement('div');
-        readStatus.classList.add('readStatus');
+        const read = document.createElement('div');
+        read.classList.add('readStatus');
         if (book.page == "unknown") {
-            readStatus.innerHTML = book.read + '%'
+            read.innerHTML = book.read + '%'
         }
         else {
-            readStatus.innerHTML = book.read + ' pages read.'
+            read.innerHTML = book.read + ' pages read.'
         }
         
         //////////// Delete book button ////////////
@@ -132,7 +126,7 @@ function displayLibrary(){
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
         bookInfo.appendChild(page);
-        bookInfo.appendChild(readStatus);
+        bookInfo.appendChild(read);
         bookInfo.appendChild(deleteBook);
         bookList.appendChild(bookInfo);
     });
