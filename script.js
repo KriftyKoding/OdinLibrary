@@ -20,15 +20,16 @@ function addBookToLibrary() {
 //////////Form input create book object///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function addBookSubmit() {
-    let readstatus = "blank"
+    let readstatus = "read status unknown"
     const title = document.getElementById("title").value;
     const author = document.getElementById("author").value;
     const page = document.getElementById("page").value;
     const statusRead = document.getElementById("have-read").checked ;
     const statusNotRead = document.getElementById("have-not-read").checked ;
      
-    if (statusRead == true) {readstatus = "read"}
-    if (statusNotRead == true) {readstaus = "Not read"}
+    if (statusRead == true) {readstatus = "read"};
+    if (statusNotRead == true) {readstatus = "have not read"};
+    console.log(statusNotRead)
 
     let book =  new Book(title, author, page, readstatus)
     myLibray.push(book)
