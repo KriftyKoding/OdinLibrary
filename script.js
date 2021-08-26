@@ -1,4 +1,5 @@
 let myLibray = []
+let bookCount = 0
 
 //////////book object constructor//////
 function Book(title, author, page, read) {
@@ -14,6 +15,8 @@ function Book(title, author, page, read) {
 //////////add book button//////////
 function addBookToLibrary() {
     console.log("add book");
+    removeBook();
+    console.log(myLibray)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +40,6 @@ function addBookSubmit() {
     let book =  new Book(title, author, page, readstatus)
     myLibray.push(book)
     
-    removeLibrary()
     displayLibrary();
 }
 
@@ -56,9 +58,13 @@ myLibray.push(theHobbit3)
 const bookList = document.querySelector("#book-list")
 displayLibrary();
 function displayLibrary(){
+    removeLibrary();
     myLibray.forEach(function(book) {
+        const atrributeID = "book" + bookCount;
+        bookCount++
         const content = document.createElement('div');
         content.classList.add('booklist');
+        content.setAttribute('id', atrributeID);
         content.textContent = book.info();
         bookList.appendChild(content);
     });
@@ -67,4 +73,11 @@ function displayLibrary(){
 //////////remove book list//////////
 function removeLibrary(){
     bookList.innerHTML = ""
+}
+
+//////////remove book from array//////////
+function removeBook(){
+    // delete myLibray[1]
+    myLibray.splice(1, 1);
+    displayLibrary();
 }
