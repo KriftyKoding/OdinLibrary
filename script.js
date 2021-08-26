@@ -1,32 +1,36 @@
 let myLibray = []
 let bookCount = 0
+const bookList = document.querySelector("#book-list")
 
-//////////book object constructor//////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Book object constructor /////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Book(title, author, page, read) {
     this.title = title;
     this.author = author;
     this.page = page;
     this.read = read;
-    this.info = function() {
-        return `${title} by ${author}, ${page} pages, ${read}.`
-    }
 }
 
-//////////add book button//////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Mics Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////// Add Book Button //////////
 function addBookToLibrary() {
     console.log("add book");
 }
 
 
-
+////////// Activate by Page Number //////////
 function pageNumberChange(num) {
     document.getElementById('readPercentValue').max = num
     document.getElementById('readPercentValue').value = 0
-    rangeValue(0);
+    readStatusChange(0);
 }
 
-
-function rangeValue(val) {
+////////// Activate by Read Status Change//////////
+function readStatusChange(val) {
     if (document.getElementById('page').value == '') {
         document.getElementById("readPercent").innerHTML = val + "%";
     } else {
@@ -35,8 +39,19 @@ function rangeValue(val) {
     
 }
 
+//////////remove book list//////////
+function removeLibrary(){
+    bookList.innerHTML = ""
+    bookCount = 0
+}
+
+//////////remove book from array//////////
+function removeBook(num){
+    myLibray.splice(num, 1);
+    displayLibrary();
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////Form input create book object///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Form input - New Book add to Array/////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function addBookSubmit() {
     // let readstatus = "read status unknown"
@@ -58,28 +73,31 @@ function addBookSubmit() {
 
 
 
-//////////test book object//////////
+////////// test book //////////
 let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
 let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
 let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
 myLibray.push(theHobbit)
 myLibray.push(theHobbit2)
 myLibray.push(theHobbit3)
-
-
-//////////create book list//////////
-const bookList = document.querySelector("#book-list")
 displayLibrary();
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Book List Display ????????????????/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayLibrary(){
     removeLibrary();
     myLibray.forEach(function(book) {
         const atrributeID = bookCount;
         bookCount++
+        //////////// Book Container Div ////////////
         const bookInfo = document.createElement('div');
         bookInfo.classList.add('booklist');
         bookInfo.setAttribute('id', atrributeID);
-        // bookInfo.textContent = book.info();
-
+        
+        //////////// Book Elements ////////////
         const title = document.createElement('div');
         title.textContent = book.title;
         title.classList.add('title');
@@ -92,9 +110,7 @@ function displayLibrary(){
         page.textContent = book.page;
         page.classList.add('page');
         
-        
-        
-        ///////// READ STATUS Range and Label /////////////////
+        //////////// READ STATUS ////////////
         const readStatus = document.createElement('div');
         readStatus.classList.add('readStatus');
         if (book.page == "unknown") {
@@ -103,16 +119,16 @@ function displayLibrary(){
         else {
             readStatus.innerHTML = book.read + ' pages read.'
         }
-                
+        
+        //////////// Delete book button ////////////
         const deleteBook = document.createElement('BUTTON');
         deleteBook.setAttribute("type", "button")
         deleteBook.setAttribute("onclick", `removeBook(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
-        // console.log(atrributeID);
         deleteBook.textContent = 'Delete Book';
         deleteBook.classList.add('deleteBook');
         
-        
+        //////////// Append ////////////
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
         bookInfo.appendChild(page);
@@ -120,21 +136,4 @@ function displayLibrary(){
         bookInfo.appendChild(deleteBook);
         bookList.appendChild(bookInfo);
     });
-}
-
-//////////remove book list//////////
-function removeLibrary(){
-    bookList.innerHTML = ""
-    bookCount = 0
-}
-
-//////////remove book from array//////////
-function removeBook(num){
-    myLibray.splice(num, 1);
-    displayLibrary();
-}
-
-//////// Change Number of Pages ////////
-function pageChange(num) {
-    
 }
