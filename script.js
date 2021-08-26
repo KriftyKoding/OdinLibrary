@@ -22,14 +22,17 @@ function addBookToLibrary() {
 function addBookSubmit() {
     let readstatus = "read status unknown"
     const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const page = document.getElementById("page").value;
+    let author = document.getElementById("author").value;
+    let page = document.getElementById("page").value;
     const statusRead = document.getElementById("have-read").checked ;
     const statusNotRead = document.getElementById("have-not-read").checked ;
      
     if (statusRead == true) {readstatus = "read"};
     if (statusNotRead == true) {readstatus = "have not read"};
-    console.log(statusNotRead)
+    
+    if (title == "") {return};
+    if (author == "") {author = "author unknown"};
+    if (page == "") {page = "unknown"};
 
     let book =  new Book(title, author, page, readstatus)
     myLibray.push(book)
@@ -37,6 +40,8 @@ function addBookSubmit() {
     removeLibrary()
     displayLibrary();
 }
+
+
 
 //////////test book object//////////
 let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not yet read')
