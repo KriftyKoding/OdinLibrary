@@ -1,6 +1,6 @@
 let myLibray = []
 let bookCount = 0
-let editbooknum = false
+let editbooknum = 0
 const bookList = document.querySelector("#book-list")
 
 
@@ -28,19 +28,15 @@ function Book(title, author, page, read) {
 
 ////////// Add Book Button //////////
 function addBookToLibrary() {
-    editbooknum = false
-
+    console.log("add book");
 }
 
 
 ////////// Activate by Page Number //////////
 function pageNumberChange(num, id) {
-    document.getElementById(id).max = num
-    document.getElementById(id).value = 0
-
-    console.log(editbooknum);
-   
-    if (editbooknum == false) {
+    document.getElementById(id).max = num;
+    document.getElementById(id).value = 0;   
+    if (id == "readPercentValue") {
         rangeValue(0, 'page', 'readPercent');
     }else {
         rangeValue(0, 'editPage', 'editReadPercent');
@@ -49,16 +45,10 @@ function pageNumberChange(num, id) {
 
 ////////// Activate by Read Status Change//////////
 function rangeValue(val, id, id2) {
-    // console.log(val);
-    // console.log(id);
-    // console.log(id2);
     if (document.getElementById(id).value === '' || document.getElementById(id).value === '0') {
         document.getElementById(id2).innerHTML = val + "%";
-        // console.log("test percent");
     } else {
         document.getElementById(id2).innerHTML = val + " pages";
-        // console.log("test pages");
-        
     }
 }
 
@@ -77,7 +67,7 @@ function removeBook(num){
 ////////// Edit Book /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function editBook(num){
-    editbooknum = true
+    editbooknum = num;
     ////////// Display Edit Book //////////
     document.getElementById("editTitle").value = myLibray[num].title
     document.getElementById("editAuthor").value = myLibray[num].author
@@ -105,6 +95,8 @@ function editBookSubmit() {
     if (title == "") {return};
     if (author == "") {author = "author unknown"};
     if (page == "") {page = "Legth unknown"};
+
+    console.log(editbooknum);
     
     myLibray[editbooknum].title = title
     myLibray[editbooknum].author = author
