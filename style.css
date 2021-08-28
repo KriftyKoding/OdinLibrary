@@ -19,7 +19,11 @@ body{
   margin-bottom: 4rem;
 }
 
-#add-book{
+#add-book {
+  white-space: pre; 
+}
+
+#edit-book {
   white-space: pre; 
 }
 
