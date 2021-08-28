@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sno Recipes</title>
-        <meta name="KrizzyDizzy" content="Recipe Page">
+        <title>Sno Library</title>
+        <meta name="Krifty" content="Sno Library">
         <link href="style.css" rel="stylesheet">
         <link rel="icon" href="SnowFlake01.png">
         <link rel="icon" href="SnowFlake01.svg">
     </head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="stylesheet">
     <body> 
         <div class="backgroundImage">
             <!-- Background image -->
@@ -21,7 +21,7 @@
 
         <main>
             <input type="button" value="Add Book" onclick="addBookToLibrary()">
-            <section id="add-book">
+            <section id="add-book" class="hide">
                 <label for="title">Title</label>
                 <input type="text" id="title">
                 <label for="author">Author</label>
@@ -35,7 +35,7 @@
 
             <div id="book-list"></div>
 
-            <section id="edit-book">
+            <section id="edit-book" class="hide">
                 <label for="title">Title</label>
                 <input type="text" id="editTitle">
                 <label for="author">Author</label>
