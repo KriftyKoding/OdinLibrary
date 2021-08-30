@@ -89,15 +89,22 @@ function editBook(num){
     ////////// Display Edit Book //////////
     document.getElementById("editTitle").value = myLibray[num].title
     document.getElementById("editAuthor").value = myLibray[num].author
+
+    console.log(myLibray[num].page);
     
-    if (myLibray[num].page == "null") {
-        document.getElementById("eReadPercentValue").value = myLibray[num].read
+    if (myLibray[num].page == "Legth unknown") {
+        document.getElementById("editReadPercentValue").value = myLibray[num].read
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + '%'
+        document.getElementById("editReadPercentValue").max = "100"
+        console.log("null");
+
     }
     else {
-        document.getElementById("editPage").value = myLibray[num].page
-        document.getElementById("editReadPercentValue").value = myLibray[num].read + "blah"
+        let pageMax = document.getElementById("editPage").value = myLibray[num].page;
+        document.getElementById("editReadPercentValue").value = myLibray[num].read;
+        document.getElementById("editReadPercentValue").max = pageMax;
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + ' pages read.'
+        console.log(pageMax);
     }
 
     removeHideClass('edit-book');    
