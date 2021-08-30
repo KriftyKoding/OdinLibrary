@@ -29,15 +29,16 @@ function Book(title, author, page, read) {
 ////////// Add Book Button //////////
 function addBookToLibrary() {
     removeHideClass('add-book');
-    clearAddBookToLibrary();
+    clearInput();
 
 }
 
-function clearAddBookToLibrary() {
+function clearInput() {
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("page").value = '';
     document.getElementById("readPercentValue").value = '0';
+    document.getElementById("readPercentValue").max = '100'
     document.getElementById("readPercent").innerHTML = '0%';
 }
 
@@ -99,7 +100,7 @@ function editBook(num){
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + ' pages read.'
     }
 
-    
+    removeHideClass('edit-book');    
 }
 
 function editBookSubmit() {
@@ -121,7 +122,7 @@ function editBookSubmit() {
     myLibray[editbooknum].read = read
     
     displayLibrary();
-    
+    addHideClass('edit-book');
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
