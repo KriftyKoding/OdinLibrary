@@ -28,9 +28,26 @@ function Book(title, author, page, read) {
 
 ////////// Add Book Button //////////
 function addBookToLibrary() {
-    console.log("add book");
+    removeHideClass('add-book');
+    clearAddBookToLibrary();
+
 }
 
+function clearAddBookToLibrary() {
+    document.getElementById("title").value = '';
+    document.getElementById("author").value = '';
+    document.getElementById("page").value = '';
+    document.getElementById("readPercentValue").value = '0';
+    document.getElementById("readPercent").innerHTML = '0%';
+}
+
+function removeHideClass(id) {
+    document.getElementById(id).removeAttribute('class', 'hide');
+}
+
+function addHideClass(id) {
+    document.getElementById(id).setAttribute('class', 'hide');
+}
 
 ////////// Activate by Page Number //////////
 function pageNumberChange(num, id) {
@@ -124,6 +141,7 @@ function addBookSubmit() {
     myLibray.push(book)
     
     displayLibrary();
+    addHideClass('add-book');
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
