@@ -92,7 +92,7 @@ function editBook(num){
 
     console.log(myLibray[num].page);
     
-    if (myLibray[num].page == "Legth unknown") {
+    if (myLibray[num].page == "Length is Unknown") {
         document.getElementById("editReadPercentValue").value = myLibray[num].read
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + '%'
         document.getElementById("editReadPercentValue").max = "100"
@@ -118,8 +118,8 @@ function editBookSubmit() {
     let read = document.getElementById("editReadPercentValue").value
     
     if (title == "") {return};
-    if (author == "") {author = "author unknown"};
-    if (page == "") {page = "Legth unknown"};
+    if (author == "") {author = "Author is unknown"};
+    if (page == "") {page = "Length is Unknown"};
 
     console.log(editbooknum);
     
@@ -142,8 +142,8 @@ function addBookSubmit() {
     let read = document.getElementById("readPercentValue").value
         
     if (title == "") {return};
-    if (author == "") {author = "author unknown"};
-    if (page == "") {page = "Legth unknown"};
+    if (author == "") {author = "Author is Unknow"};
+    if (page == "") {page = "Length is Unknown"};
 
     let book =  new Book(title, author, page, read)
     myLibray.push(book)
@@ -175,7 +175,7 @@ function displayLibrary(){
         author.classList.add('author');
         
         const page = document.createElement('div');
-        page.textContent = book.page;
+        page.textContent = book.page + " pages";
         page.classList.add('page');
         
         //////////// READ STATUS ////////////
