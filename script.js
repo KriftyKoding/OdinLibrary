@@ -30,7 +30,6 @@ function Book(title, author, page, read) {
 function addBookToLibrary() {
     removeHideClass('add-book');
     clearInput();
-
 }
 
 function clearInput() {
@@ -215,3 +214,68 @@ function displayLibrary(){
         bookList.appendChild(bookInfo);
     });
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Local Storage /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//save for console use
+function deleteLocalData () {
+    localStorage.clear();
+}
+
+function localStorageCheck() {  
+    if (checkStorageAvailable('localStorage')) {
+        if(!localStorage.getItem('myLibray')) {
+            console.log("data not there");
+        } else {
+            retriveLibrary();
+        }
+      }
+      else {
+        console.log("Local Storage Not available");
+    }
+}
+
+
+function checkStorageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+function retriveLibrary() {
+    let jsonString = localStorage.getItem("myLibray")
+    var retrievedObject = JSON.parse(jsonString);
+    console.log(retrievedObject);
+    myLibray = retrievedObject;
+    displayLibrary();
+
+    console.log(JSON.stringify(myLibray))
+
+  }
+
+function saveLibrary() {
+    localStorage.setItem("myLibray", JSON.stringify(myLibray))
+    console.log(JSON.stringify(myLibray))
+  }
