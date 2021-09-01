@@ -2,7 +2,7 @@ let myLibray = []
 let bookCount = 0
 let editbooknum = 0
 const bookList = document.querySelector("#book-list")
-let ogNum = 0
+let ogNum = 0;
 
 
 ////////// test books //////////
@@ -53,12 +53,8 @@ function addHideClass(id) {
 
 ////////// Activate by Page Number //////////
 function pageNumberChange(num, id) {
-    console.log(ogNum + "ognum");
-    document.getElementById(id).max = num;
-    // document.getElementById(id).value = 0;   
     if (id == "readPercentValue") {
-        console.log(document.getElementById('readPercentValue').value, num);
-        let percent = calPercentRead(document.getElementById('readPercentValue').value, num, ogNum);
+        let percent = calPercentRead(document.getElementById('readPercentValue').value, num);
         rangeValue(percent, 'page', 'readPercent');
     }else {
         let percent = calPercentRead(document.getElementById('editReadPercentValue').value, num, ogNum);
@@ -67,31 +63,25 @@ function pageNumberChange(num, id) {
     ogNum = num;
 }
 
-function calPercentRead(percent, pageMax, ogNum){
-   console.log(percent);
-   console.log(pageMax);
+function calPercentRead(percent, pageMax){
     if (percent == 0){
         return 0;
-    }else{
+    } else {
         if (pageMax == 0){
-            console.log("equal zero");
-            console.log(percent);
-            console.log(ogNum);
             return (Math.round((percent / ogNum)*100))
         } else if (ogNum == 0) {
             return (Math.round((percent * pageMax)/100))
         } else {
-            console.log("***else");
-            console.log(percent);
-            console.log(ogNum);
-            return (Math.round((percent / ogNum) * 100))
+            let answer = Math.round((percent / ogNum) * pageMax);
+            document.getElementById('readPercentValue').max = pageMax;
+            document.getElementById('readPercentValue').value = answer;
+            return answer
         }
     }
 }
 
 ////////// Activate by Read Status Change//////////
 function rangeValue(val, id, id2) {
-    console.log(val);
     if (document.getElementById(id).value === '' || document.getElementById(id).value === '0') {
         document.getElementById(id2).innerHTML = val + "%";
     } else {
@@ -118,9 +108,6 @@ function editBook(num){
     ////////// Display Edit Book //////////
     document.getElementById("editTitle").value = myLibray[num].title
     document.getElementById("editAuthor").value = myLibray[num].author
-
-    console.log(myLibray[num].page);
-
     
     if (myLibray[num].page == "Length is Unknown" || myLibray[num].page == null) {
         ogNum = 0;
@@ -128,17 +115,13 @@ function editBook(num){
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + '%'
         document.getElementById("editPage").value = ''
         document.getElementById("editReadPercentValue").max = "100"
-        console.log("null");
-
-    }
-    else {
+    } else {
         let pageMax = document.getElementById("editPage").value = myLibray[num].page;
         ogNum = pageMax;
         document.getElementById("editReadPercentValue").value = myLibray[num].read;
         document.getElementById("editReadPercentValue").max = pageMax;
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + ' pages read.'
-        console.log(pageMax);
-    }
+        }
 
     removeHideClass('edit-book');    
 }
@@ -154,8 +137,6 @@ function editBookSubmit() {
     if (author == "") {author = "Author is unknown"};
     if (page == "") {page = "Length is Unknown"};
 
-    console.log(editbooknum);
-    
     myLibray[editbooknum].title = title
     myLibray[editbooknum].author = author
     myLibray[editbooknum].page = page
@@ -257,7 +238,6 @@ function displayLibrary(){
 //savelibrary button
 function saveLibrary() {
     localStorage.setItem("myLibray", JSON.stringify(myLibray))
-    console.log(JSON.stringify(myLibray))
 }
 
 //retrive Library button
@@ -277,12 +257,8 @@ function localStorageCheck() {
 function retriveLibrary() {
     let jsonString = localStorage.getItem("myLibray")
     var retrievedObject = JSON.parse(jsonString);
-    console.log(retrievedObject);
     myLibray = retrievedObject;
-    displayLibrary();
-    
-    console.log(JSON.stringify(myLibray))
-    
+    displayLibrary();    
 }
 //check if storage is avaiable 
 // copied from https://developer.mozilla.org/
