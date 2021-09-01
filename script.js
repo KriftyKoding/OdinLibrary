@@ -2,6 +2,7 @@ let myLibray = []
 let bookCount = 0
 let editbooknum = 0
 const bookList = document.querySelector("#book-list")
+let ogNum = 0
 
 
 ////////// test books //////////
@@ -30,6 +31,7 @@ function Book(title, author, page, read) {
 function addBookToLibrary() {
     removeHideClass('add-book');
     clearInput();
+    ogNum = 0
 }
 
 function clearInput() {
@@ -51,17 +53,45 @@ function addHideClass(id) {
 
 ////////// Activate by Page Number //////////
 function pageNumberChange(num, id) {
+    console.log(ogNum + "ognum");
     document.getElementById(id).max = num;
-    document.getElementById(id).value = 0;   
+    // document.getElementById(id).value = 0;   
     if (id == "readPercentValue") {
-        rangeValue(0, 'page', 'readPercent');
+        console.log(document.getElementById('readPercentValue').value, num);
+        let percent = calPercentRead(document.getElementById('readPercentValue').value, num, ogNum);
+        rangeValue(percent, 'page', 'readPercent');
     }else {
-        rangeValue(0, 'editPage', 'editReadPercent');
+        let percent = calPercentRead(document.getElementById('editReadPercentValue').value, num, ogNum);
+        rangeValue(percent, 'editPage', 'editReadPercent');
+    }
+    ogNum = num;
+}
+
+function calPercentRead(percent, pageMax, ogNum){
+   console.log(percent);
+   console.log(pageMax);
+    if (percent == 0){
+        return 0;
+    }else{
+        if (pageMax == 0){
+            console.log("equal zero");
+            console.log(percent);
+            console.log(ogNum);
+            return (Math.round((percent / ogNum)*100))
+        } else if (ogNum == 0) {
+            return (Math.round((percent * pageMax)/100))
+        } else {
+            console.log("***else");
+            console.log(percent);
+            console.log(ogNum);
+            return (Math.round((percent / ogNum) * 100))
+        }
     }
 }
 
 ////////// Activate by Read Status Change//////////
 function rangeValue(val, id, id2) {
+    console.log(val);
     if (document.getElementById(id).value === '' || document.getElementById(id).value === '0') {
         document.getElementById(id2).innerHTML = val + "%";
     } else {
@@ -90,16 +120,20 @@ function editBook(num){
     document.getElementById("editAuthor").value = myLibray[num].author
 
     console.log(myLibray[num].page);
+
     
-    if (myLibray[num].page == "Length is Unknown") {
+    if (myLibray[num].page == "Length is Unknown" || myLibray[num].page == null) {
+        ogNum = 0;
         document.getElementById("editReadPercentValue").value = myLibray[num].read
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + '%'
+        document.getElementById("editPage").value = ''
         document.getElementById("editReadPercentValue").max = "100"
         console.log("null");
 
     }
     else {
         let pageMax = document.getElementById("editPage").value = myLibray[num].page;
+        ogNum = pageMax;
         document.getElementById("editReadPercentValue").value = myLibray[num].read;
         document.getElementById("editReadPercentValue").max = pageMax;
         document.getElementById("editReadPercent").innerHTML = myLibray[num].read + ' pages read.'
@@ -180,7 +214,7 @@ function displayLibrary(){
         //////////// READ STATUS ////////////
         const read = document.createElement('div');
         read.classList.add('readStatus');
-        if (book.page == "unknown") {
+        if (book.page == "unknown" || book.page == "Length is Unknown")  {
             read.innerHTML = book.read + '%'
         }
         else {
