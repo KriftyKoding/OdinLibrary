@@ -220,11 +220,13 @@ function displayLibrary(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Local Storage /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//save for console use
-function deleteLocalData () {
-    localStorage.clear();
+//savelibrary button
+function saveLibrary() {
+    localStorage.setItem("myLibray", JSON.stringify(myLibray))
+    console.log(JSON.stringify(myLibray))
 }
 
+//retrive Library button
 function localStorageCheck() {  
     if (checkStorageAvailable('localStorage')) {
         if(!localStorage.getItem('myLibray')) {
@@ -232,13 +234,24 @@ function localStorageCheck() {
         } else {
             retriveLibrary();
         }
-      }
-      else {
+    }
+    else {
         console.log("Local Storage Not available");
     }
 }
 
-
+function retriveLibrary() {
+    let jsonString = localStorage.getItem("myLibray")
+    var retrievedObject = JSON.parse(jsonString);
+    console.log(retrievedObject);
+    myLibray = retrievedObject;
+    displayLibrary();
+    
+    console.log(JSON.stringify(myLibray))
+    
+}
+//check if storage is avaiable 
+// copied from https://developer.mozilla.org/
 function checkStorageAvailable(type) {
     var storage;
     try {
@@ -261,21 +274,11 @@ function checkStorageAvailable(type) {
             e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
             // acknowledge QuotaExceededError only if there's something already stored
             (storage && storage.length !== 0);
+        }
     }
-}
-
-function retriveLibrary() {
-    let jsonString = localStorage.getItem("myLibray")
-    var retrievedObject = JSON.parse(jsonString);
-    console.log(retrievedObject);
-    myLibray = retrievedObject;
-    displayLibrary();
-
-    console.log(JSON.stringify(myLibray))
-
-  }
-
-function saveLibrary() {
-    localStorage.setItem("myLibray", JSON.stringify(myLibray))
-    console.log(JSON.stringify(myLibray))
-  }
+    
+    
+    //SAVED for console use only
+    function deleteLocalData () {
+        localStorage.clear();
+    }
