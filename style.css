@@ -33,9 +33,16 @@ body{
 
 .popup--child {
   background-color: cyan;
-  /* width: 20rem;
-  height: 20rem; */
+  width: fit-content;
+  margin: auto; 
+  padding: 0rem 1rem;
 }
+
+.popup--child >* {
+  margin-left: -5rem;
+}
+
+
 
 #book-container{
   margin: 1rem;
