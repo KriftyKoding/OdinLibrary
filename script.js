@@ -180,31 +180,26 @@ function displayLibrary(){
         bookInfo.setAttribute('id', atrributeID);
         
         //////////// Book Elements ////////////
-        const title = document.createElement('div');
+        const title = document.createElement('h3');
         title.textContent = book.title;
         title.classList.add('title');
         
-        const author = document.createElement('div');
+        const author = document.createElement('h5');
         author.textContent = book.author;
         author.classList.add('author');
         
         
         //////////// Page and Status ////////////
-        const pageContainer = document.createElement('div');
-
-        
-        const page = document.createElement('span');
-        page.textContent = book.page + " pages";
-        page.classList.add('page');
-        
-        const read = document.createElement('span');
-        read.classList.add('readStatus');
-        if (book.page == "unknown" || book.page == "Length is Unknown")  {
-            read.innerHTML = book.read + '%'
+        const pageContainer = document.createElement('p');
+        pageContainer.classList.add('page');
+        if (book.page == 'Length is Unknown' && book.read != 0){
+            pageContainer.textContent = book.read + '%'
+        } else if (book.page != 'Length is Unknown' && book.read == 0) {
+            pageContainer.textContent = book.pages + ' Pages'
+        } else if (book.page != 'Length is Unknown' && book.read != 0) {
+            pageContainer.textContent =  `${book.read} / ${book.page} pages`
         }
-        else {
-            read.innerHTML = book.read + ' pages read.'
-        }
+        
         
         //////////// Edit book button ////////////
         const editBook = document.createElement('BUTTON');
@@ -226,8 +221,6 @@ function displayLibrary(){
         //////////// Append ////////////
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
-        pageContainer.appendChild(read);
-        pageContainer.appendChild(page);
         bookInfo.appendChild(pageContainer);
         bookInfo.appendChild(editBook);
         bookInfo.appendChild(deleteBook);
