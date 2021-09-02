@@ -39,9 +39,6 @@ body{
   background-color: burlywood;
   margin: auto;
   width: fit-content;
- 
- 
-  
 }
 
 .popup--child > * {
@@ -67,14 +64,15 @@ body{
   margin: 1rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .booklist{
   /* margin-top: 20px; */
   flex: none;
   /* width: 8rem; */
-  margin-right: auto;
-  margin-bottom: 1rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
   padding: .7rem;
   text-align: center;
   background-color: blueviolet; 
