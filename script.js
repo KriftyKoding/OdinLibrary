@@ -134,7 +134,6 @@ function editBookSubmit() {
     let read = document.getElementById("editPercentRange").value
     
     if (title == "") {return};
-    if (author == "") {author = "Author is unknown"};
     if (page == "") {page = "Length is Unknown"};
 
     myLibray[editbooknum].title = title
@@ -156,7 +155,6 @@ function addBookSubmit() {
     let read = document.getElementById("percentRange").value
         
     if (title == "") {return};
-    if (author == "") {author = "Author is Unknow"};
     if (page == "") {page = "Length is Unknown"};
 
     let book =  new Book(title, author, page, read)
@@ -192,10 +190,11 @@ function displayLibrary(){
         //////////// Page and Status ////////////
         const pageContainer = document.createElement('p');
         pageContainer.classList.add('page');
-        if (book.page == 'Length is Unknown' && book.read != 0){
+        console.log(book.page);
+        if (book.read != 0 && book.page == 'Length is Unknown' || book.page == '0'){
             pageContainer.textContent = book.read + '%'
         } else if (book.page != 'Length is Unknown' && book.read == 0) {
-            pageContainer.textContent = book.pages + ' Pages'
+            pageContainer.textContent = book.page + ' Pages'
         } else if (book.page != 'Length is Unknown' && book.read != 0) {
             pageContainer.textContent =  `${book.read} / ${book.page} pages`
         }
