@@ -25,7 +25,7 @@
             <input type="button" value="Retrive Saved Data" onclick="localStorageCheck()">
             <!-- <input type="button" value="Delete Save Data" onclick="deleteLocalData()"> -->
 
-            <section id="add-book" class="hide">
+            <section id="add-book-popup" class="hide">
                 <label for="title">Title</label>
                 <input type="text" id="title">
                 <label for="author">Author</label>
@@ -37,9 +37,9 @@
                 <input type="submit" value="Submit" onclick="addBookSubmit()">
             </section>
 
-            <div id="book-list"></div>
+            <div id="book-container"></div>
 
-            <section id="edit-book" class="hide">
+            <section id="edit-book-popup" class="hide">
                 <label for="title">Title</label>
                 <input type="text" id="editTitle">
                 <label for="author">Author</label>

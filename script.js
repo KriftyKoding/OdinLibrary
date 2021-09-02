@@ -1,7 +1,7 @@
 let myLibray = []
 let bookCount = 0
 let editbooknum = 0
-const bookList = document.querySelector("#book-list")
+const bookList = document.querySelector("#book-container")
 let ogNum = 0;
 
 
@@ -222,10 +222,10 @@ function displayLibrary(){
         //////////// Append ////////////
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
-        bookInfo.appendChild(page);
         bookInfo.appendChild(read);
-        bookInfo.appendChild(deleteBook);
+        bookInfo.appendChild(page);
         bookInfo.appendChild(editBook);
+        bookInfo.appendChild(deleteBook);
         bookList.appendChild(bookInfo);
     });
 }

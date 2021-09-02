@@ -19,25 +19,39 @@ body{
   margin-bottom: 4rem;
 }
 
-#add-book {
+#add-book-popup {
   white-space: pre; 
 }
 
-#edit-book {
+#edit-book-popup {
   white-space: pre; 
+}
+
+#book-container{
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: DodgerBlue;
 }
 
 .booklist{
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  flex: none;
+  /* width: 8rem; */
+  margin-right: auto;
+  margin-bottom: 1rem;
+  padding: .7rem;
+  text-align: center;
+  background-color: blueviolet;
+
+  
 }
 
 .hide {
   display: none;
 }
 
-.show {
-  background: purple;
-}
+
 
 
 
