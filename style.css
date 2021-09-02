@@ -33,6 +33,9 @@ body{
   flex-wrap: wrap;
   background-color: DodgerBlue;
 }
+.hide {
+  display: none;
+}
 
 .booklist{
   /* margin-top: 20px; */
@@ -47,10 +50,9 @@ body{
   
 }
 
-.hide {
-  display: none;
+.editBook {
+  white-space:pre-line;
 }
-
 
 
 

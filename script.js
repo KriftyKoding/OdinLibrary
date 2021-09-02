@@ -188,12 +188,16 @@ function displayLibrary(){
         author.textContent = book.author;
         author.classList.add('author');
         
-        const page = document.createElement('div');
+        
+        //////////// Page and Status ////////////
+        const pageContainer = document.createElement('div');
+
+        
+        const page = document.createElement('span');
         page.textContent = book.page + " pages";
         page.classList.add('page');
         
-        //////////// READ STATUS ////////////
-        const read = document.createElement('div');
+        const read = document.createElement('span');
         read.classList.add('readStatus');
         if (book.page == "unknown" || book.page == "Length is Unknown")  {
             read.innerHTML = book.read + '%'
@@ -201,15 +205,15 @@ function displayLibrary(){
         else {
             read.innerHTML = book.read + ' pages read.'
         }
-
+        
         //////////// Edit book button ////////////
-         const editBook = document.createElement('BUTTON');
-         editBook.setAttribute("type", "button")
-         editBook.setAttribute("onclick", `editBook(${atrributeID})`)
-         bookInfo.classList.add(atrributeID);
-         editBook.textContent = 'Edit Book';
-         editBook.classList.add('editBook');
-
+        const editBook = document.createElement('BUTTON');
+        editBook.setAttribute("type", "button")
+        editBook.setAttribute("onclick", `editBook(${atrributeID})`)
+        bookInfo.classList.add(atrributeID);
+        editBook.textContent = 'Edit Book';
+        editBook.classList.add('editBook');
+        
         
         //////////// Delete book button ////////////
         const deleteBook = document.createElement('BUTTON');
@@ -222,8 +226,9 @@ function displayLibrary(){
         //////////// Append ////////////
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
-        bookInfo.appendChild(read);
-        bookInfo.appendChild(page);
+        pageContainer.appendChild(read);
+        pageContainer.appendChild(page);
+        bookInfo.appendChild(pageContainer);
         bookInfo.appendChild(editBook);
         bookInfo.appendChild(deleteBook);
         bookList.appendChild(bookInfo);
