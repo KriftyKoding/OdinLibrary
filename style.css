@@ -21,13 +21,46 @@ body{
 
 .hide {
   display: none;
-}
-#add-book-popup {
-  white-space: pre; 
+ 
 }
 
-#edit-book-popup {
+.popup {
   white-space: pre; 
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: indigo;
+  /* opacity: .9; */
+  top: 0;
+  bottom: 0;
+}
+
+.popup--child{
+  background-color: burlywood;
+  margin: auto;
+  width: fit-content;
+ 
+ 
+  
+}
+
+.popup--child > * {
+  font-size: large;
+  /* margin-left: -2.5rem;
+  margin-bottom: .5rem; */
+}
+
+#percentRange {
+  /* width: 16rem;
+  margin: 0% 25%; */
+}
+
+#percentLabel{
+  /* margin: 0% 25%; */
+}
+
+#submit{
+  /* margin: 0% auto; */
 }
 
 #book-container{
