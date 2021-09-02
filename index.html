@@ -42,15 +42,17 @@
             <div id="book-container"></div>        
 
             <section id="edit-book-popup" class="hide popup">
-                <label for="title">Title</label>
-                <input type="text" id="editTitle">
-                <label for="author">Author</label>
-                <input type="text" id="editAuthor">
-                <label for="page">Number of Pages</label>
-                <input type="number" name="" id="editPage" oninput="pageNumberChange(this.value, `editPercentRange`, true)">
-                <input type="range" min="0" max="100" value="0" id="editPercentRange" oninput="rangeValue(this.value, `editPage`, `editPercentLabel`)">
-                <label for="range" id="editPercentLabel">0%</label>
-                <input type="submit" value="Submit" onclick="editBookSubmit()">
+                <div class="popup--child">
+                    <label for="title">Title</label>
+                    <input type="text" id="editTitle">
+                    <label for="author">Author</label>
+                    <input type="text" id="editAuthor">
+                    <label for="page">Number of Pages</label>
+                    <input type="number" name="" id="editPage" oninput="pageNumberChange(this.value, `editPercentRange`, true)">
+                    <input type="range" min="0" max="100" value="0" id="editPercentRange" oninput="rangeValue(this.value, `editPage`, `editPercentLabel`)">
+                    <label for="range" id="editPercentLabel">0%</label>
+                    <input type="submit" value="Submit" onclick="editBookSubmit()">
+                </div>
             </section>
 
         </main>
