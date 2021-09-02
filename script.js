@@ -44,7 +44,7 @@ function clearInput() {
 }
 
 function removeHideClass(id) {
-    document.getElementById(id).removeAttribute('class', 'hide');
+    document.getElementById(id).setAttribute('class', 'popup');
 }
 
 function addHideClass(id) {
@@ -205,8 +205,8 @@ function displayLibrary(){
         editBook.setAttribute("type", "button")
         editBook.setAttribute("onclick", `editBook(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
-        editBook.textContent = 'Edit Book';
-        editBook.classList.add('editBook');
+        editBook.textContent = 'Edit';
+        editBook.classList.add('bookButton', 'editBookButton');
         
         
         //////////// Delete book button ////////////
@@ -214,8 +214,8 @@ function displayLibrary(){
         deleteBook.setAttribute("type", "button")
         deleteBook.setAttribute("onclick", `removeBook(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
-        deleteBook.textContent = 'Delete Book';
-        deleteBook.classList.add('deleteBook');
+        deleteBook.textContent = 'Delete';
+        deleteBook.classList.add('bookButton', 'deleteBookButton');
         
         //////////// Append ////////////
         bookInfo.appendChild(title);
