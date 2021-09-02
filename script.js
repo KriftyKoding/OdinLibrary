@@ -80,12 +80,12 @@ function calPercentRead(percent, pageMax){
     }
 }
 
-////////// onInput by Read Status Change//////////
-function rangeValue(val, id, id2) {
-    if (document.getElementById(id).value === '' || document.getElementById(id).value === '0') {
-        document.getElementById(id2).innerHTML = val + "%";
+////////// onChange by Read Status Change//////////
+function rangeValue(val, idEditPage, idPercentLabel) {
+    if (document.getElementById(idEditPage).value === '' || document.getElementById(idEditPage).value === '0') {
+        document.getElementById(idPercentLabel).innerHTML = val + "%";
     } else {
-        document.getElementById(id2).innerHTML = val + " pages";
+        document.getElementById(idPercentLabel).innerHTML = val + " pages";
     }
 }
 
