@@ -2,8 +2,6 @@
   Position:fixed;
   Top: 0;
   left: 0%;
-  /* Width: 100vh; */
-  /* Height: 100vmin; */
   Opacity: 0.35;
   Z-index: -5000;
 }
@@ -21,44 +19,23 @@ body{
 
 .hide {
   display: none;
- 
 }
-/* 
+
 .popup {
   position: fixed;
   top: 0;
   bottom: 0;
   height: 100vh;
   width: 100vw;
-  background-color: indigo;
-  opacity: .9;
   white-space: pre; 
-} */
-/* 
-.popup--child{
-  background-color: burlywood;
-  margin: auto;
-  width: fit-content;
-} */
+  backdrop-filter: blur(1px) grayscale(1);
+} 
 
-/* .popup--child > * { */
-  /* font-size: large; */
-  /* margin-left: -2.5rem;
-  margin-bottom: .5rem; */
-/* } */
-
-/* #percentRange { */
-  /* width: 16rem;
-  margin: 0% 25%; */
-/* } */
-
-/* #percentLabel{ */
-  /* margin: 0% 25%; */
-/* } */
-
-/* #submit{ */
-  /* margin: 0% auto; */
-/* } */
+.popup--child {
+  background-color: cyan;
+  /* width: 20rem;
+  height: 20rem; */
+}
 
 #book-container{
   margin: 1rem;
