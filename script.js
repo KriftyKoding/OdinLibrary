@@ -29,7 +29,7 @@ function Book(title, author, page, read) {
 
 ////////// Add Book Button //////////
 function addBookToLibrary() {
-    removeHideClass('add-book');
+    removeHideClass('add-book-popup');
     clearInput();
     ogNum = 0
 }
@@ -38,9 +38,9 @@ function clearInput() {
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("page").value = '';
-    document.getElementById("readPercentValue").value = '0';
-    document.getElementById("readPercentValue").max = '100'
-    document.getElementById("readPercent").innerHTML = '0%';
+    document.getElementById("rangePercentRead").value = '0';
+    document.getElementById("rangePercentRead").max = '100'
+    document.getElementById("percentReadLabel").innerHTML = '0%';
 }
 
 function removeHideClass(id) {
@@ -53,12 +53,12 @@ function addHideClass(id) {
 
 ////////// Activate by Page Number //////////
 function pageNumberChange(num, id) {
-    if (id == "readPercentValue") {
-        let percent = calPercentRead(document.getElementById('readPercentValue').value, num);
-        rangeValue(percent, 'page', 'readPercent');
+    if (id == "rangePercentRead") {
+        let percent = calPercentRead(document.getElementById('rangePercentRead').value, num);
+        rangeValue(percent, 'page', 'percentReadLabel');
     }else {
-        let percent = calPercentRead(document.getElementById('editReadPercentValue').value, num, ogNum);
-        rangeValue(percent, 'editPage', 'editReadPercent');
+        let percent = calPercentRead(document.getElementById('editRangePercentRead').value, num, ogNum);
+        rangeValue(percent, 'editPage', 'editPercentReadLabel');
     }
     ogNum = num;
 }
@@ -73,8 +73,8 @@ function calPercentRead(percent, pageMax){
             return (Math.round((percent * pageMax)/100))
         } else {
             let answer = Math.round((percent / ogNum) * pageMax);
-            document.getElementById('readPercentValue').max = pageMax;
-            document.getElementById('readPercentValue').value = answer;
+            document.getElementById('rangePercentRead').max = pageMax;
+            document.getElementById('rangePercentRead').value = answer;
             return answer
         }
     }
@@ -111,19 +111,19 @@ function editBook(num){
     
     if (myLibray[num].page == "Length is Unknown" || myLibray[num].page == null) {
         ogNum = 0;
-        document.getElementById("editReadPercentValue").value = myLibray[num].read
-        document.getElementById("editReadPercent").innerHTML = myLibray[num].read + '%'
+        document.getElementById("editRangePercentRead").value = myLibray[num].read
+        document.getElementById("editPercentReadLabel").innerHTML = myLibray[num].read + '%'
         document.getElementById("editPage").value = ''
-        document.getElementById("editReadPercentValue").max = "100"
+        document.getElementById("editRangePercentRead").max = "100"
     } else {
         let pageMax = document.getElementById("editPage").value = myLibray[num].page;
         ogNum = pageMax;
-        document.getElementById("editReadPercentValue").value = myLibray[num].read;
-        document.getElementById("editReadPercentValue").max = pageMax;
-        document.getElementById("editReadPercent").innerHTML = myLibray[num].read + ' pages read.'
+        document.getElementById("editRangePercentRead").value = myLibray[num].read;
+        document.getElementById("editRangePercentRead").max = pageMax;
+        document.getElementById("editPercentReadLabel").innerHTML = myLibray[num].read + ' pages read.'
         }
 
-    removeHideClass('edit-book');    
+    removeHideClass('edit-book-popup');    
 }
 
 function editBookSubmit() {
@@ -131,7 +131,7 @@ function editBookSubmit() {
     const title = document.getElementById("editTitle").value;
     let author = document.getElementById("editAuthor").value;
     let page = document.getElementById("editPage").value;
-    let read = document.getElementById("editReadPercentValue").value
+    let read = document.getElementById("editRangePercentRead").value
     
     if (title == "") {return};
     if (author == "") {author = "Author is unknown"};
@@ -143,7 +143,7 @@ function editBookSubmit() {
     myLibray[editbooknum].read = read
     
     displayLibrary();
-    addHideClass('edit-book');
+    addHideClass('edit-book-popup');
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ function addBookSubmit() {
     const title = document.getElementById("title").value;
     let author = document.getElementById("author").value;
     let page = document.getElementById("page").value;
-    let read = document.getElementById("readPercentValue").value
+    let read = document.getElementById("rangePercentRead").value
         
     if (title == "") {return};
     if (author == "") {author = "Author is Unknow"};
@@ -163,7 +163,7 @@ function addBookSubmit() {
     myLibray.push(book)
     
     displayLibrary();
-    addHideClass('add-book');
+    addHideClass('add-book-popup');
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
