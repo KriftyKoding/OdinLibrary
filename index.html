@@ -31,9 +31,9 @@
                 <label for="author">Author</label>
                 <input type="text" id="author">
                 <label for="page">Number of Pages</label>
-                <input type="number" name="" id="page" onchange="pageNumberChange(this.value, `rangePercentRead`)">
-                <input type="range" min="0" max="100" value="0" id="rangePercentRead" oninput="rangeValue(this.value, `page`, `percentReadLabel`)">
-                <label for="range" id="percentReadLabel">0%</label>
+                <input type="number" name="" id="page" oninput="pageNumberChange(this.value, `percentRange`)">
+                <input type="range" min="0" max="100" value="0" id="percentRange" oninput="rangeValue(this.value, `page`, `percentLabel`)">
+                <label for="range" id="percentLabel">0%</label>
                 <input type="submit" value="Submit" onclick="addBookSubmit()">
             </section>
 
@@ -46,9 +46,9 @@
                 <label for="author">Author</label>
                 <input type="text" id="editAuthor">
                 <label for="page">Number of Pages</label>
-                <input type="number" name="" id="editPage" onchange="pageNumberChange(this.value, `editRangePercentRead`, true)">
-                <input type="range" min="0" max="100" value="0" id="editRangePercentRead" oninput="rangeValue(this.value, `editPage`, `editPercentReadLabel`)">
-                <label for="range" id="editPercentReadLabel">0%</label>
+                <input type="number" name="" id="editPage" oninput="pageNumberChange(this.value, `editPercentRange`, true)">
+                <input type="range" min="0" max="100" value="0" id="editPercentRange" oninput="rangeValue(this.value, `editPage`, `editPercentLabel`)">
+                <label for="range" id="editPercentLabel">0%</label>
                 <input type="submit" value="Submit" onclick="editBookSubmit()">
             </section>
             
