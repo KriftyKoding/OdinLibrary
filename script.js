@@ -54,16 +54,16 @@ function addHideClass(id) {
 ////////// onChange by Page Number //////////
 function pageNumberChange(num, id) {
     if (id == "percentRange") {
-        let percent = calPercentRead(document.getElementById('percentRange').value, num);
+        let percent = calPercentRead(document.getElementById('percentRange').value, num, "percentRange");
         rangeValue(percent, 'page', 'percentLabel');
     }else {
-        let percent = calPercentRead(document.getElementById('editPercentRange').value, num, ogNum);
+        let percent = calPercentRead(document.getElementById('editPercentRange').value, num, 'editPercentRange');
         rangeValue(percent, 'editPage', 'editPercentLabel');
     }
     ogNum = num;
 }
 
-function calPercentRead(percent, pageMax){
+function calPercentRead(percent, pageMax, percentRange){
     if (percent == 0){
         return 0;
     } else {
@@ -73,8 +73,8 @@ function calPercentRead(percent, pageMax){
             return (Math.round((percent * pageMax)/100))
         } else {
             let answer = Math.round((percent / ogNum) * pageMax);
-            document.getElementById('percentRange').max = pageMax;
-            document.getElementById('percentRange').value = answer;
+            document.getElementById(percentRange).max = pageMax;
+            document.getElementById(percentRange).value = answer;
             return answer
         }
     }
