@@ -2,7 +2,6 @@ let myLibray = []
 let bookCount = 0
 let editbooknum = 0
 const bookList = document.querySelector("#book-container")
-let ogNum = 0;
 
 
 ////////// test books //////////
@@ -31,7 +30,6 @@ function Book(title, author, page, read) {
 function addBookToLibrary() {
     removeHideClass('add-book-popup');
     clearInput();
-    ogNum = 0
 }
 
 function clearInput() {
@@ -54,40 +52,13 @@ function addHideClass(id) {
 ////////// onChange by Page Number //////////
 function pageNumberChange(num, id) {
     if (id == "percentRange") {
-        let percent = calPercentRead(document.getElementById('percentRange').value, num, "percentRange");
-        rangeValue(percent, 'page', 'percentLabel');
+        
     }else {
-        let percent = calPercentRead(document.getElementById('editPercentRange').value, num, 'editPercentRange');
-        rangeValue(percent, 'editPage', 'editPercentLabel');
-    }
-    ogNum = num;
-}
-
-function calPercentRead(percent, pageMax, percentRange){
-    if (percent == 0){
-        return 0;
-    } else {
-        if (pageMax == 0){
-            return (Math.round((percent / ogNum)*100))
-        } else if (ogNum == 0) {
-            return (Math.round((percent * pageMax)/100))
-        } else {
-            let answer = Math.round((percent / ogNum) * pageMax);
-            document.getElementById(percentRange).max = pageMax;
-            document.getElementById(percentRange).value = answer;
-            return answer
-        }
+        
     }
 }
 
-////////// onChange by Read Status Change//////////
-function rangeValue(val, idEditPage, idPercentLabel) {
-    if (document.getElementById(idEditPage).value === '' || document.getElementById(idEditPage).value === '0') {
-        document.getElementById(idPercentLabel).innerHTML = val + "%";
-    } else {
-        document.getElementById(idPercentLabel).innerHTML = val + " pages";
-    }
-}
+
 
 //////////remove book list//////////
 function removeLibrary(){
@@ -110,14 +81,12 @@ function editBook(num){
     document.getElementById("editAuthor").value = myLibray[num].author
     
     if (myLibray[num].page == "Length is Unknown" || myLibray[num].page == null) {
-        ogNum = 0;
         document.getElementById("editPercentRange").value = myLibray[num].read
         document.getElementById("editPercentLabel").innerHTML = myLibray[num].read + '%'
         document.getElementById("editPage").value = ''
         document.getElementById("editPercentRange").max = "100"
     } else {
         let pageMax = document.getElementById("editPage").value = myLibray[num].page;
-        ogNum = pageMax;
         document.getElementById("editPercentRange").value = myLibray[num].read;
         document.getElementById("editPercentRange").max = pageMax;
         document.getElementById("editPercentLabel").innerHTML = myLibray[num].read + ' pages read.'
