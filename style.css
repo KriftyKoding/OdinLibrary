@@ -61,15 +61,19 @@ body{
 .booklist{
   flex: none;
   margin: 1rem;
-  /* padding: .7rem; */
+  width: 9rem;
   text-align: center;
   background-color: blueviolet; 
-  padding: 0;
-  
+  position: relative;
 }
 
-.booklist > * {
-  margin: .2rem;
+.title, .author, .page  {
+  margin: .5rem;
+  padding: .25rem .75rem;
+}
+
+.page {
+  margin-bottom: 1.2rem;
 }
 
 .bookButton {
@@ -78,25 +82,18 @@ body{
   border: none;
   color: white;
   cursor: pointer;
-  margin: 0;
-  margin-top: .3rem;
+  position: absolute;
+  bottom: 0;
 }
-
-.title, .author, .page  {
-  padding: .25rem .75rem;
-}
-
-.title {
-  padding-top: .4rem;
-}
-
 
 .editBookButton{
   background-color: red;
+  left: 0;
 }
 
 .deleteBookButton{
   background-color:cornflowerblue;
+  right: 0;
 }
 
 
