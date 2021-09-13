@@ -27,20 +27,28 @@ body{
   bottom: 0;
   height: 100vh;
   width: 100vw;
-  white-space: pre-line; 
   backdrop-filter: blur(1px) grayscale(.8);
 } 
 
-.popup--child {
+.popup-child {
   background-color: cyan;
   width: fit-content;
   margin: auto; 
   margin-top: 5%;
-  padding: .5rem 2rem 2rem 2rem;
+  padding: 1.5rem;
+  position: relative;
 }
 
-.popup--child >* {
-  /* margin-left: -5rem; */
+.popup-child >* {
+  display: block;
+}
+
+.exit-button{
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+
+  
 }
 
 #book-container{

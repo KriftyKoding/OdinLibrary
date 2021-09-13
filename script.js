@@ -34,6 +34,10 @@ function addBookToLibrary() {
     ogNum = 0;
 }
 
+function exit(id) {
+    document.getElementById(id).classList.add('hide');
+}
+
 function clearInput() {
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
