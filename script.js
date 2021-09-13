@@ -150,6 +150,7 @@ function removeBook(num){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function editBook(num){
     editbooknum = num;
+    ogNum = document.getElementById("editPage").value
     ////////// Display Edit Book //////////
     document.getElementById("editTitle").value = myLibray[num].title
     document.getElementById("editAuthor").value = myLibray[num].author

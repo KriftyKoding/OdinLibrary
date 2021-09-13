@@ -48,7 +48,7 @@
                     <label for="author">Author</label>
                     <input type="text" id="editAuthor">
                     <label for="page">Number of Pages</label>
-                    <input type="number" name="" id="editPage" oninput="pageNumberChange(this.value, `editPercentRange`)">
+                    <input type="number" name="" id="editPage" onchange="pageNumberChange(this.value, `editPercentRange`)">
                     <input type="range" min="0" max="100" value="0" id="editPercentRange" oninput="rangeValueButton(this.value,  `editPercentLabel`, `editPage`)">
                     <label for="range" id="editPercentLabel">0%</label>
                     <input type="submit" value="Submit" onclick="editBookSubmit()">
