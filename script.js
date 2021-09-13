@@ -3,16 +3,27 @@ let bookCount = 0
 let editbooknum = 0
 const bookList = document.querySelector("#book-container")
 let ogNum = 0;
+let undo = []
 
 
-////////// test books //////////
-let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
-let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
-let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
-myLibray.push(theHobbit)
-myLibray.push(theHobbit2)
-myLibray.push(theHobbit3)
-displayLibrary();
+
+////////// test books for furture test //////////
+// let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
+// let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
+// let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
+// let theHobbit4 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
+// let theHobbit5 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
+// let theHobbit6 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
+
+// myLibray.push(theHobbit)
+// myLibray.push(theHobbit2)
+// myLibray.push(theHobbit3)
+// myLibray.push(theHobbit4)
+// myLibray.push(theHobbit5)
+// myLibray.push(theHobbit6)
+// displayLibrary();
+
+retriveLibrary();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Book object constructor /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +43,26 @@ function addBookToLibrary() {
     removeHideClass('add-book-popup');
     clearInput();
     ogNum = 0;
+}
+
+function restoreBookButton(){
+    if (undo.length == 0) {
+        console.log("no undo");
+        return;
+    }
+    console.log('RESTORE');
+    let test = undo.shift();
+    console.log("TEST");
+    console.log(test);
+    console.log(test[1]);
+    myLibray.push(test);
+    console.log("myLibray");
+    console.log(myLibray);
+    displayLibrary();
+    console.log("undo");
+    console.log(undo);
+    console.log(`library`);
+    console.log(myLibray);
 }
 
 function exit(id) {
@@ -145,8 +176,13 @@ function removeLibrary(){
 }
 
 ////////// Remove book from array//////////
-function removeBook(num){
-    myLibray.splice(num, 1);
+function removeBookButton(num){
+    console.log('remove book button');
+    undo.unshift(myLibray.splice(num,1)[0]);
+    console.log("undo");
+    console.log(undo);
+    console.log(`library`);
+    console.log(myLibray);
     displayLibrary();
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,6 +255,7 @@ function addBookSubmit() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayLibrary(){
     removeLibrary();
+    saveLibrary();
     myLibray.forEach(function(book) {
         const atrributeID = bookCount;
         bookCount++
@@ -261,7 +298,7 @@ function displayLibrary(){
         //////////// Delete book button ////////////
         const deleteBook = document.createElement('BUTTON');
         deleteBook.setAttribute("type", "button")
-        deleteBook.setAttribute("onclick", `removeBook(${atrributeID})`)
+        deleteBook.setAttribute("onclick", `removeBookButton(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
         deleteBook.textContent = 'Delete';
         deleteBook.classList.add('bookButton', 'deleteBookButton');
