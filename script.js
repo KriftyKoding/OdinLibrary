@@ -31,7 +31,7 @@ function Book(title, author, page, read) {
 function addBookToLibrary() {
     removeHideClass('add-book-popup');
     clearInput();
-    ogNum = 0
+    ogNum = 0;
 }
 
 function clearInput() {
@@ -52,7 +52,7 @@ function addHideClass(id) {
 }
 
 ////////// onChange by Page Number //////////
-function pageNumberChange(pageMax, id) {
+function pageNumberChange(userInputPageNum, id) {
     let idPercentRange;
     let idPage;
     let idPercentLabel;
@@ -71,24 +71,67 @@ function pageNumberChange(pageMax, id) {
     }
 
     let percentRangeValue = document.getElementById(idPercentRange).value
-        
-    let readCalcNum = calPercentRead(percentRangeValue, pageMax, idPercentRange);
-    rangeValue(readCalcNum, idPage, idPercentLabel);
+    let readCalcNum = calPercentRead(percentRangeValue, userInputPageNum);
+    rangeAdjust(readCalcNum, userInputPageNum, idPercentRange, idPercentLabel, idPage)
 }
 
-function calPercentRead(percentRangeValue, pageMax, idPercentRange){
-   
+function rangeAdjust(readCalcNum, userInputPageNum, idPercentRange, idPercentLabel, idPage) {
+    let max 
+    let value
+    let label
+    
+    if (readCalcNum == "Fuck Matt") {
+        document.getElementById(idPage).value = ogNum
+        console.log(`Fuck Beard`);
+    } else {
+        if (userInputPageNum == 0 || userInputPageNum == '') {
+            max = 100
+            value = readCalcNum;
+            label = `${Math.round(readCalcNum)} %`
+        } else {
+            max = userInputPageNum
+            value = readCalcNum;
+            label = `${Math.round(readCalcNum)} pages`
+        }
+        ogNum = userInputPageNum
+        document.getElementById(idPercentRange).max = max
+        document.getElementById(idPercentRange).value = value
+        document.getElementById(idPercentLabel).innerHTML = label
+    }    
+}
+
+function calPercentRead(percentRangeValue, userInputPageNum){
+   if (userInputPageNum != '' && (userInputPageNum == 1 || userInputPageNum <= 0)){
+        alert("Page Numbers can not be set to 0 or 1");
+        return "Fuck Matt";
+    } 
+    if (percentRangeValue == 0) {
+    return 0;
+    } else if (ogNum == 0) {
+            return (percentRangeValue/100) * userInputPageNum;
+     } else if (ogNum != 0) {
+        if (userInputPageNum == ''){
+            return ((percentRangeValue/ogNum) * 100);
+        }else if (userInputPageNum != 0){
+            return((percentRangeValue/ogNum)*userInputPageNum);
+        }else {
+            return;
+        }
+    } else {
+        console.error("OG unkown and percentRange error")
+        return;
+    }
 }
 
 ////////// onChange by Read Status Change//////////
-function rangeValue(val, idEditPage, idPercentLabel) {
-
-    document.getElementById(idPercentLabel).innerHTML = document.getElementById('percentRange').value
-    // if (document.getElementById(idEditPage).value === '' || document.getElementById(idEditPage).value === '0') {
-    //     document.getElementById(idPercentLabel).innerHTML = val + "%";
-    // } else {
-    //     document.getElementById(idPercentLabel).innerHTML = val + " pages";
-    // }
+function rangeValueButton(value, idPercentLabel, idPage) {
+    let pageNumber = document.getElementById(idPage).value
+    if (pageNumber <= 2) {
+        value = `${value}%`
+    } else {
+        value = `${value} pages`
+    }
+    document.getElementById(idPercentLabel).innerHTML = value
 }
 
 //////////remove book list//////////
@@ -118,10 +161,10 @@ function editBook(num){
         document.getElementById("editPage").value = ''
         document.getElementById("editPercentRange").max = "100"
     } else {
-        let pageMax = document.getElementById("editPage").value = myLibray[num].page;
-        ogNum = pageMax;
+        let userInputPageNum = document.getElementById("editPage").value = myLibray[num].page;
+        ogNum = userInputPageNum;
         document.getElementById("editPercentRange").value = myLibray[num].read;
-        document.getElementById("editPercentRange").max = pageMax;
+        document.getElementById("editPercentRange").max = userInputPageNum;
         document.getElementById("editPercentLabel").innerHTML = myLibray[num].read + ' pages read.'
         }
 
@@ -192,7 +235,6 @@ function displayLibrary(){
         //////////// Page and Status ////////////
         const pageContainer = document.createElement('p');
         pageContainer.classList.add('page');
-        console.log(book.page);
         if (book.read != 0 && book.page == 'Length is Unknown' || book.page == '0'){
             pageContainer.textContent = book.read + '%'
         } else if (book.page != 'Length is Unknown' && book.read == 0) {
