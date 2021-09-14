@@ -25,34 +25,34 @@
             <div id="book-container"></div>        
 
             <section id="add-book-popup" class="hide popup">
-                <div class="popup-child">
+                <form class="popup-child" action="javascript:addBookSubmit()">
                     <label for="title">Title</label>
                     <input type="button" value="x" class="exit-button" onclick="exit('add-book-popup')">
-                    <input type="text" id="title">
+                    <input type="text" id="title" name="title" required>
                     <label for="author">Author</label>
                     <input type="text" id="author">
                     <label for="page">Number of Pages</label>
                     <input type="number" name="" id="page" onchange="pageNumberChange(this.value, `percentRange`)">
                     <input type="range" min="0" max="100" value="0" id="percentRange" oninput="rangeValueButton(this.value, `percentLabel`, 'page')">
                     <label for="range" id="percentLabel">0%</label>
-                    <input type="submit" id="submit" value="Submit" onclick="addBookSubmit()">
-                </div>
+                    <button type="submit">Submit</button>
+                </form>
             </section>
 
 
             <section id="edit-book-popup" class="hide popup">
-                <div class="popup-child">
+                <form class="popup-child" action="javascript:editBookSubmit()">
                     <label for="title">Title</label>
                     <input type="button" value="x" class="exit-button" onclick="exit('edit-book-popup')">
-                    <input type="text" id="editTitle">
+                    <input type="text" id="editTitle" required>
                     <label for="author">Author</label>
                     <input type="text" id="editAuthor">
                     <label for="page">Number of Pages</label>
                     <input type="number" name="" id="editPage" onchange="pageNumberChange(this.value, `editPercentRange`)">
                     <input type="range" min="0" max="100" value="0" id="editPercentRange" oninput="rangeValueButton(this.value,  `editPercentLabel`, `editPage`)">
                     <label for="range" id="editPercentLabel">0%</label>
-                    <input type="submit" value="Submit" onclick="editBookSubmit()">
-                </div>
+                    <button type="submit">Submit</button>
+                </form>
             </section>
 
         </main>

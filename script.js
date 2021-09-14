@@ -7,7 +7,7 @@ let undo = []
 
 
 
-////////// test books for furture test //////////
+////////// test books for future test //////////
 // let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
 // let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
 // let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
@@ -27,7 +27,7 @@ retriveLibrary();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Book object constructor /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Book(title, author, page, read) {
+function Book(title, author, page, read) { 
     this.title = title;
     this.author = author;
     this.page = page;
@@ -219,7 +219,6 @@ function editBookSubmit() {
     let page = document.getElementById("editPage").value;
     let read = document.getElementById("editPercentRange").value
     
-    if (title == "") {return};
     if (page == "") {page = "Length is Unknown"};
 
     myLibray[editbooknum].title = title
@@ -240,7 +239,6 @@ function addBookSubmit() {
     let page = document.getElementById("page").value;
     let read = document.getElementById("percentRange").value
         
-    if (title == "") {return};
     if (page == "") {page = "Length is Unknown"};
 
     let book =  new Book(title, author, page, read)
