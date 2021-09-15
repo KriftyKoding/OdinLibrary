@@ -25,9 +25,9 @@ retrieveLibrary();
 // displayLibrary();
 
  //SAVED for console use only
- function deleteLocalData () {
-    localStorage.clear();
-}
+//  function deleteLocalData () {
+//     localStorage.clear();
+// }
 //******************************************************************************************************************************************************* 
 //********test books for future test********************************************************************************************************************* 
 
@@ -46,14 +46,19 @@ function Book(title, author, page, read) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Restore Book Button //////////
 function restoreBookBTTN(){
-    if (undo.length == 0) {
-        console.log("no undo");
-        return;
-    }
     let test = undo.shift();
     myLibrary.push(test);
     displayLibrary();
+
+    if (undo.length == 0) {
+        addHideClass('restore-id');
+        console.log("no undo");
+        return;
+    }
+  
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Pop-up Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,11 +101,11 @@ function clearInput() {
 }
 ////////// Show Pop-Up //////////
 function removeHideClass(id) {
-    document.getElementById(id).setAttribute('class', 'popup');
+    document.getElementById(id).classList.remove('class', 'hide');
 }
 ////////// Hide Pop-Up //////////
 function addHideClass(id) {
-    document.getElementById(id).setAttribute('class', 'hide');
+    document.getElementById(id).classList.add('class', 'hide');
 }
 //////////////////////////////////////////////////////////////////////
 /////////Slider Calc ~Pages and Pages read cal////////////////////////
@@ -232,6 +237,7 @@ function editBookSubmitBTTN() {
 function removeBookBTTN(num){
     undo.unshift(myLibrary.splice(num,1)[0]);
     displayLibrary();
+    removeHideClass("restore-id");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
