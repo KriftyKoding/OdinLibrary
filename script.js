@@ -1,13 +1,14 @@
-let myLibray = []
-let bookCount = 0
-let editbooknum = 0
 const bookList = document.querySelector("#book-container")
+let myLibrary = []
+let bookCount = 0
+let editBookNum = 0
 let ogNum = 0;
 let undo = []
 
+retrieveLibrary();
 
-
-////////// test books for future test //////////
+//******************************************************************************************************************************************************* 
+//********test books for future test********************************************************************************************************************* 
 // let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 25)
 // let theHobbit2 = new Book('The Hobbit2', 'J.R.R. Tolkien', '295', 100)
 // let theHobbit3 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
@@ -15,15 +16,21 @@ let undo = []
 // let theHobbit5 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
 // let theHobbit6 = new Book('The Hobbit3', 'J.R.R. Tolkien', '295', 40)
 
-// myLibray.push(theHobbit)
-// myLibray.push(theHobbit2)
-// myLibray.push(theHobbit3)
-// myLibray.push(theHobbit4)
-// myLibray.push(theHobbit5)
-// myLibray.push(theHobbit6)
+// myLibrary.push(theHobbit)
+// myLibrary.push(theHobbit2)
+// myLibrary.push(theHobbit3)
+// myLibrary.push(theHobbit4)
+// myLibrary.push(theHobbit5)
+// myLibrary.push(theHobbit6)
 // displayLibrary();
 
-retriveLibrary();
+ //SAVED for console use only
+ function deleteLocalData () {
+    localStorage.clear();
+}
+//******************************************************************************************************************************************************* 
+//********test books for future test********************************************************************************************************************* 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Book object constructor /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,40 +42,50 @@ function Book(title, author, page, read) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////// Mics Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Misc Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////// Add Book Button //////////
-function addBookToLibrary() {
-    removeHideClass('add-book-popup');
-    clearInput();
-    ogNum = 0;
-}
-
-function restoreBookButton(){
+////////// Restore Book Button //////////
+function restoreBookBTTN(){
     if (undo.length == 0) {
         console.log("no undo");
         return;
     }
-    console.log('RESTORE');
     let test = undo.shift();
-    console.log("TEST");
-    console.log(test);
-    console.log(test[1]);
-    myLibray.push(test);
-    console.log("myLibray");
-    console.log(myLibray);
+    myLibrary.push(test);
     displayLibrary();
-    console.log("undo");
-    console.log(undo);
-    console.log(`library`);
-    console.log(myLibray);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Pop-up Functions ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////// Add Book Button //////////
+function addBookToLibraryBTTN() {
+    removeHideClass('add-book-popup');
+    clearInput();
+    ogNum = 0;
+}
+////////// Exit Pop-Up Button //////////
 function exit(id) {
     document.getElementById(id).classList.add('hide');
 }
+////////// Form input - New Book add to Array////////////
+function addBookSubmit() {
+    const title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let page = document.getElementById("page").value;
+    let read = document.getElementById("percentRange").value
+        
+    if (page == "") {page = "Length is Unknown"};
 
+    let book =  new Book(title, author, page, read)
+    myLibrary.push(book)
+    
+    displayLibrary();
+    addHideClass('add-book-popup');
+}
+
+////////// Clear Pop-up Data//////////
 function clearInput() {
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
@@ -77,16 +94,18 @@ function clearInput() {
     document.getElementById("percentRange").max = '100'
     document.getElementById("percentLabel").innerHTML = '0%';
 }
-
+////////// Show Pop-Up //////////
 function removeHideClass(id) {
     document.getElementById(id).setAttribute('class', 'popup');
 }
-
+////////// Hide Pop-Up //////////
 function addHideClass(id) {
     document.getElementById(id).setAttribute('class', 'hide');
 }
-
-////////// onChange by Page Number //////////
+//////////////////////////////////////////////////////////////////////
+/////////Slider Calc ~Pages and Pages read cal////////////////////////
+/////////////////////////////////////////////////////////////////////
+////////// onChange(num input) by Page Number Input//////////
 function pageNumberChange(userInputPageNum, id) {
     let idPercentRange;
     let idPage;
@@ -104,17 +123,15 @@ function pageNumberChange(userInputPageNum, id) {
         console.error('Not proper ID in pageNumberChange()');
         return;
     }
-
     let percentRangeValue = document.getElementById(idPercentRange).value
     let readCalcNum = calPercentRead(percentRangeValue, userInputPageNum);
     rangeAdjust(readCalcNum, userInputPageNum, idPercentRange, idPercentLabel, idPage)
 }
-
+////////// adjust Read Percent(slider)//////////
 function rangeAdjust(readCalcNum, userInputPageNum, idPercentRange, idPercentLabel, idPage) {
     let max 
     let value
     let label
-    
     if (readCalcNum == "Fuck Matt") {
         document.getElementById(idPage).value = ogNum
         console.log(`Fuck Beard`);
@@ -134,7 +151,7 @@ function rangeAdjust(readCalcNum, userInputPageNum, idPercentRange, idPercentLab
         document.getElementById(idPercentLabel).innerHTML = label
     }    
 }
-
+////////// calc New Read Percent Value(slider)//////////
 function calPercentRead(percentRangeValue, userInputPageNum){
    if (userInputPageNum != '' && (userInputPageNum == 1 || userInputPageNum <= 0)){
         alert("Page Numbers can not be set to 0 or 1");
@@ -157,8 +174,7 @@ function calPercentRead(percentRangeValue, userInputPageNum){
         return;
     }
 }
-
-////////// onChange by Read Status Change//////////
+////////// onChange(slider) by Read Percent//////////
 function rangeValueButton(value, idPercentLabel, idPage) {
     let pageNumber = document.getElementById(idPage).value
     if (pageNumber <= 2) {
@@ -168,110 +184,76 @@ function rangeValueButton(value, idPercentLabel, idPage) {
     }
     document.getElementById(idPercentLabel).innerHTML = value
 }
-
-//////////remove book list//////////
-function removeLibrary(){
-    bookList.innerHTML = ""
-    bookCount = 0
-}
-
-////////// Remove book from array//////////
-function removeBookButton(num){
-    console.log('remove book button');
-    undo.unshift(myLibray.splice(num,1)[0]);
-    console.log("undo");
-    console.log(undo);
-    console.log(`library`);
-    console.log(myLibray);
-    displayLibrary();
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////// Edit Book /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////
+////////// Edit Book Pop-UP////////////////////
+//////////////////////////////////////////////
+///////// Display Book to edit in Pop-up/////
 function editBook(num){
-    editbooknum = num;
+    editBookNum = num;
     ogNum = document.getElementById("editPage").value
-    ////////// Display Edit Book //////////
-    document.getElementById("editTitle").value = myLibray[num].title
-    document.getElementById("editAuthor").value = myLibray[num].author
+    document.getElementById("editTitle").value = myLibrary[num].title
+    document.getElementById("editAuthor").value = myLibrary[num].author
     
-    if (myLibray[num].page == "Length is Unknown" || myLibray[num].page == null) {
+    if (myLibrary[num].page == "Length is Unknown" || myLibrary[num].page == null) {
         ogNum = 0;
-        document.getElementById("editPercentRange").value = myLibray[num].read
-        document.getElementById("editPercentLabel").innerHTML = myLibray[num].read + '%'
+        document.getElementById("editPercentRange").value = myLibrary[num].read
+        document.getElementById("editPercentLabel").innerHTML = myLibrary[num].read + '%'
         document.getElementById("editPage").value = ''
         document.getElementById("editPercentRange").max = "100"
     } else {
-        let userInputPageNum = document.getElementById("editPage").value = myLibray[num].page;
+        let userInputPageNum = document.getElementById("editPage").value = myLibrary[num].page;
         ogNum = userInputPageNum;
-        document.getElementById("editPercentRange").value = myLibray[num].read;
+        document.getElementById("editPercentRange").value = myLibrary[num].read;
         document.getElementById("editPercentRange").max = userInputPageNum;
-        document.getElementById("editPercentLabel").innerHTML = myLibray[num].read + ' pages read.'
-        }
-
+        document.getElementById("editPercentLabel").innerHTML = myLibrary[num].read + ' pages read.'
+    }
+    
     removeHideClass('edit-book-popup');    
 }
-
-function editBookSubmit() {
-    ////////// Edit Book //////////
+////////// Edit Book Submit //////////
+function editBookSubmitBTTN() {
     const title = document.getElementById("editTitle").value;
     let author = document.getElementById("editAuthor").value;
     let page = document.getElementById("editPage").value;
     let read = document.getElementById("editPercentRange").value
     
     if (page == "") {page = "Length is Unknown"};
-
-    myLibray[editbooknum].title = title
-    myLibray[editbooknum].author = author
-    myLibray[editbooknum].page = page
-    myLibray[editbooknum].read = read
+    
+    myLibrary[editBookNum].title = title
+    myLibrary[editBookNum].author = author
+    myLibrary[editBookNum].page = page
+    myLibrary[editBookNum].read = read
     
     displayLibrary();
     addHideClass('edit-book-popup');
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////// Form input - New Book add to Array/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function addBookSubmit() {
-    const title = document.getElementById("title").value;
-    let author = document.getElementById("author").value;
-    let page = document.getElementById("page").value;
-    let read = document.getElementById("percentRange").value
-        
-    if (page == "") {page = "Length is Unknown"};
-
-    let book =  new Book(title, author, page, read)
-    myLibray.push(book)
-    
+////////// Remove book Button//////////
+function removeBookBTTN(num){
+    undo.unshift(myLibrary.splice(num,1)[0]);
     displayLibrary();
-    addHideClass('add-book-popup');
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////// Creat Libray List Display ????????????????/////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Display Library/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayLibrary(){
     removeLibrary();
     saveLibrary();
-    myLibray.forEach(function(book) {
+    myLibrary.forEach(function(book) {
         const atrributeID = bookCount;
         bookCount++
         //////////// Book Container Div ////////////
         const bookInfo = document.createElement('div');
-        bookInfo.classList.add('booklist');
+        bookInfo.classList.add('book-list');
         bookInfo.setAttribute('id', atrributeID);
-        
         //////////// Book Elements ////////////
         const title = document.createElement('h3');
         title.textContent = book.title;
         title.classList.add('title');
-        
         const author = document.createElement('h5');
         author.textContent = book.author;
         author.classList.add('author');
-        
-        
         //////////// Page and Status ////////////
         const pageContainer = document.createElement('p');
         pageContainer.classList.add('page');
@@ -282,25 +264,20 @@ function displayLibrary(){
         } else if (book.page != 'Length is Unknown' && book.read != 0) {
             pageContainer.textContent =  `${book.read} / ${book.page} pages`
         }
-        
-        
         //////////// Edit book button ////////////
         const editBook = document.createElement('BUTTON');
         editBook.setAttribute("type", "button")
         editBook.setAttribute("onclick", `editBook(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
         editBook.textContent = 'Edit';
-        editBook.classList.add('bookButton', 'editBookButton');
-        
-        
+        editBook.classList.add('book-Button', 'edit-Book-Button');
         //////////// Delete book button ////////////
         const deleteBook = document.createElement('BUTTON');
         deleteBook.setAttribute("type", "button")
-        deleteBook.setAttribute("onclick", `removeBookButton(${atrributeID})`)
+        deleteBook.setAttribute("onclick", `removeBookBTTN(${atrributeID})`)
         bookInfo.classList.add(atrributeID);
         deleteBook.textContent = 'Delete';
-        deleteBook.classList.add('bookButton', 'deleteBookButton');
-        
+        deleteBook.classList.add('book-Button', 'delete-Book-Button');
         //////////// Append ////////////
         bookInfo.appendChild(title);
         bookInfo.appendChild(author);
@@ -311,23 +288,27 @@ function displayLibrary(){
     });
 }
 
-
+////////// Clear Library Dom//////////
+function removeLibrary(){
+    bookList.innerHTML = ""
+    bookCount = 0
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Local Storage /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //savelibrary button
 function saveLibrary() {
-    localStorage.setItem("myLibray", JSON.stringify(myLibray))
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
 }
 
 //retrive Library button
 function localStorageCheck() {  
     if (checkStorageAvailable('localStorage')) {
-        if(!localStorage.getItem('myLibray')) {
+        if(!localStorage.getItem('myLibrary')) {
             console.log("data not there");
         } else {
-            retriveLibrary();
+            retrieveLibrary();
         }
     }
     else {
@@ -335,10 +316,10 @@ function localStorageCheck() {
     }
 }
 
-function retriveLibrary() {
-    let jsonString = localStorage.getItem("myLibray")
+function retrieveLibrary() {
+    let jsonString = localStorage.getItem("myLibrary")
     var retrievedObject = JSON.parse(jsonString);
-    myLibray = retrievedObject;
+    myLibrary = retrievedObject;
     displayLibrary();    
 }
 //check if storage is avaiable 
@@ -366,10 +347,4 @@ function checkStorageAvailable(type) {
             // acknowledge QuotaExceededError only if there's something already stored
             (storage && storage.length !== 0);
         }
-    }
-    
-    
-    //SAVED for console use only
-    function deleteLocalData () {
-        localStorage.clear();
     }

@@ -58,7 +58,7 @@ body{
   justify-content: flex-start;
 }
 
-.booklist{
+.book-list{
   flex: none;
   margin: 1rem;
   width: 9rem;
@@ -76,7 +76,7 @@ body{
   margin-bottom: 1.2rem;
 }
 
-.bookButton {
+.book-Button {
   width: 50%;
   background-color: #4CAF50;
   border: none;
@@ -86,16 +86,15 @@ body{
   bottom: 0;
 }
 
-.editBookButton{
+.edit-Book-Button{
   background-color: red;
   left: 0;
 }
 
-.deleteBookButton{
+.delete-Book-Button{
   background-color:cornflowerblue;
   right: 0;
 }
-
 
 .fixed-footer{
   width: 100%;
