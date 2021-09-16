@@ -1,11 +1,12 @@
-const bookList = document.querySelector("#book-container")
+
 let myLibrary = []
 let bookCount = 0
 let editBookNum = 0
 let ogNum = 0;
 let undo = []
+const bookList = document.querySelector("#book-container")
 
-retrieveLibrary();
+localStorageCheck();
 
 //******************************************************************************************************************************************************* 
 //********test books for future test********************************************************************************************************************* 
@@ -25,9 +26,9 @@ retrieveLibrary();
 // displayLibrary();
 
  //SAVED for console use only
-//  function deleteLocalData () {
-//     localStorage.clear();
-// }
+ function deleteLocalData () {
+    localStorage.clear();
+}
 //******************************************************************************************************************************************************* 
 //********test books for future test********************************************************************************************************************* 
 
@@ -243,6 +244,9 @@ function removeBookBTTN(num){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// Display Library/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 function displayLibrary(){
     if (myLibrary.length == 0) {
         // const bookList = document.querySelector("#book-container")
@@ -251,7 +255,7 @@ function displayLibrary(){
         noBook.classList.add('no-book');
         noBook.textContent ='Please add a book to start your library.' 
         bookList.appendChild(noBook);
-        // return;
+        return;
     }
     removeLibrary();
     saveLibrary();
@@ -319,15 +323,18 @@ function saveLibrary() {
 
 //retrive Library button
 function localStorageCheck() {  
+    console.log("localstorage");
     if (checkStorageAvailable('localStorage')) {
         if(!localStorage.getItem('myLibrary')) {
-            console.log("data not there");
+            console.log("no local storage");
+            displayLibrary();
+
         } else {
             retrieveLibrary();
         }
     }
     else {
-        console.log("Local Storage Not available");
+        console.log("can not save library");
     }
 }
 
