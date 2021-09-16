@@ -244,6 +244,15 @@ function removeBookBTTN(num){
 ////////// Display Library/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function displayLibrary(){
+    if (myLibrary.length == 0) {
+        // const bookList = document.querySelector("#book-container")
+        console.log('no books');
+        const noBook = document.createElement('div');
+        noBook.classList.add('no-book');
+        noBook.textContent ='Please add a book to start your library.' 
+        bookList.appendChild(noBook);
+        // return;
+    }
     removeLibrary();
     saveLibrary();
     myLibrary.forEach(function(book) {
@@ -323,6 +332,7 @@ function localStorageCheck() {
 }
 
 function retrieveLibrary() {
+    console.log('retriving books');
     let jsonString = localStorage.getItem("myLibrary")
     var retrievedObject = JSON.parse(jsonString);
     myLibrary = retrievedObject;
