@@ -14,7 +14,45 @@
 
 body{
   margin: 0;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
+  padding-bottom: 5rem; 
+  scroll-padding-bottom: 1000px;
+}
+
+.line{
+  height: .5rem;
+  width: 100vw;
+  background-color: black;
+  margin-top: .5rem;
+}
+header{
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 3rem;
+}
+
+.add-botton{
+  position: fixed;
+  top: 1rem;
+  left: 2rem;
+  /* font-size: 2rem; */
+  font-size: 1.5rem;
+  font-weight: bolder;
+  height: 3rem;
+  width: 3rem;
+  cursor: pointer;
+}
+
+
+#restore-id{
+  position: fixed;
+  top: 1rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  /* font-weight: bolder; */
+  height: 3rem;
+  /* width: 3rem; */
+  cursor: pointer;
 }
 
 .hide {
@@ -46,16 +84,22 @@ body{
 .exit-button{
   position: absolute;
   top: .5rem;
-  right: .5rem;
-
-  
+  right: .5rem;  
 }
 
 #book-container{
+  /* position: sticky; */
   margin: 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.no-book{
+  text-align: center;
+  font-size: 2rem;
+  margin: auto;
+  margin-top: 1.5rem;
 }
 
 .book-list{
@@ -95,6 +139,16 @@ body{
   background-color:cornflowerblue;
   right: 0;
 }
+
+/* .main-bttn{
+  text-align: center;
+  position: fixed;
+  bottom: 2.2rem;
+  width: 100vw;
+  background-image: url(IMG_20210520_213142.jpg);
+} */
+
+
 
 .fixed-footer{
   width: 100%;

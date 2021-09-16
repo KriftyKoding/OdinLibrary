@@ -18,10 +18,13 @@
         <header>
             Sno Library
         </header>
+        <div class="line" data-tooltip="Add Book"></div>
+        <!-- <div class="add-botton" data-tooltip="Add Book" ></div> -->
+        <input type="button" value="+" class="add-botton" title="add book" onclick="addBookToLibraryBTTN()">
+        <input type="button" value="Restore Book" id="restore-id"  class="hide"  onclick="restoreBookBTTN()">
+
 
         <main>
-            <input type="button" value="Add Book" onclick="addBookToLibraryBTTN()">
-            <input type="button" value="Restore-Book" id="restore-id" class="hide" onclick="restoreBookBTTN()">
             <!-- Pop-Up  -->
             <div id="book-container"></div>        
             <section id="add-book-popup" class="hide popup">
@@ -38,7 +41,7 @@
                     <button type="submit">Submit</button>
                 </form>
             </section>
-
+            
             <section id="edit-book-popup" class="hide popup">
                 <form class="popup-child" action="javascript:editBookSubmitBTTN()">
                     <label for="title">Title</label>
@@ -53,9 +56,10 @@
                     <button type="submit">Submit</button>
                 </form>
             </section>
-
         </main>
-
+            <!-- <div class="main-bttn">
+               
+            </div> -->
         
         <div class="fixed-footer">
             <!-- footer -->
