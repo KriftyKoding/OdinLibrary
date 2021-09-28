@@ -104,7 +104,10 @@ header{
   text-align: center;
   background-color: #a8a8ab; 
   padding-bottom: 1.5rem;
-
+  /* border: 5px solid lightslategray; */
+  border-left: 13px solid lightslategray;
+  -webkit-box-shadow: 5px 5px 15px 5px #686868; 
+  box-shadow: 5px 5px 15px 5px #686868;
 }
 
 .add-botton{
