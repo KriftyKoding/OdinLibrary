@@ -19,14 +19,14 @@
             Sno Library
         </header>
         <div class="line" data-tooltip="Add Book"></div>
-        <!-- <div class="add-botton" data-tooltip="Add Book" ></div> -->
-        <input type="button" value="+" class="add-botton" title="Add Book" onclick="addBookToLibraryBTTN()">
         <input type="button" value="Restore Book" id="restore-id"  class="hide"  onclick="restoreBookBTTN()">
 
 
         <main>
             <!-- Pop-Up  -->
-            <div id="book-container"></div>        
+            <div id="book-container">
+                <input type="button" value="+" class="book-list add-botton" title="Add Book" onclick="addBookToLibraryBTTN()">
+            </div>        
             <section id="add-book-popup" class="hide popup">
                 <form class="popup-child" action="javascript:addBookSubmit()">
                     <label for="title">Title</label>

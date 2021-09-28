@@ -248,17 +248,26 @@ function removeBookBTTN(num){
 
 
 function displayLibrary(){
-    if (myLibrary.length == 0) {
-        // const bookList = document.querySelector("#book-container")
-        console.log('no books');
-        const noBook = document.createElement('div');
-        noBook.classList.add('no-book');
-        noBook.textContent ='Please add a book to start your library.' 
-        bookList.appendChild(noBook);
-        return;
-    }
+    // if (myLibrary.length == 0) {
+    //     // const bookList = document.querySelector("#book-container")
+    //     console.log('no books');
+    //     const noBook = document.createElement('div');
+    //     noBook.classList.add('no-book');
+    //     noBook.textContent ='Please add a book to start your library.' 
+    //     bookList.appendChild(noBook);
+    //     return;
+    // }
     removeLibrary();
     saveLibrary();
+    //add button
+    const addBTTN = document.createElement('index')
+    addBTTN.setAttribute("type", "button")
+    addBTTN.setAttribute("onclick", "addBookToLibraryBTTN()")
+    // addBTTN.setAttribute("value", "the dog");
+    addBTTN.classList.add('book-list', 'add-botton');
+    addBTTN.textContent = "+"
+
+
     myLibrary.forEach(function(book) {
         const atrributeID = bookCount;
         bookCount++
@@ -305,6 +314,8 @@ function displayLibrary(){
         bookInfo.appendChild(deleteBook);
         bookList.appendChild(bookInfo);
     });
+
+    bookList.appendChild(addBTTN);
 }
 
 ////////// Clear Library Dom//////////

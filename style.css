@@ -31,17 +31,6 @@ header{
   font-size: 3rem;
 }
 
-.add-botton{
-  position: fixed;
-  top: 1rem;
-  left: 2rem;
-  /* font-size: 2rem; */
-  font-size: 1.5rem;
-  font-weight: bolder;
-  height: 3rem;
-  width: 3rem;
-  cursor: pointer;
-}
 
 
 #restore-id{
@@ -114,7 +103,15 @@ header{
   min-height: 9.5rem;
   text-align: center;
   background-color: #a8a8ab; 
+  padding-bottom: 1.5rem;
 
+}
+
+.add-botton{
+  font-size: xx-large;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
 }
 
 .title, .author, .page  {
@@ -131,7 +128,7 @@ header{
   /* color: white; */
   cursor: pointer;
   position: absolute;
-  bottom: -1.5rem;
+  bottom: 0;
 }
 
 .edit-Book-Button{
