@@ -27,8 +27,10 @@ body{
 }
 header{
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1,5rem;
   font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgb(255 227 211), 3px 3px 5px rgb(232 143 110);
 }
 
 
