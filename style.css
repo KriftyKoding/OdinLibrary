@@ -22,7 +22,7 @@ body{
 .line{
   height: .5rem;
   width: 100vw;
-  background-color: black;
+  background-color: #f1debc;
   margin-top: .5rem;
 }
 header{
