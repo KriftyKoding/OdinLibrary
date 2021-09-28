@@ -265,7 +265,7 @@ function displayLibrary(){
     addBTTN.setAttribute("onclick", "addBookToLibraryBTTN()")
     // addBTTN.setAttribute("value", "the dog");
     addBTTN.classList.add('book-list', 'add-botton');
-    addBTTN.textContent = "+"
+    addBTTN.textContent = "Add Book"
 
 
     myLibrary.forEach(function(book) {

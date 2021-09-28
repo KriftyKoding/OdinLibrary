@@ -60,22 +60,44 @@ header{
 } 
 
 .popup-child {
-  background-color: cyan;
+  background-color: #ce8e8b;
+  width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+  width: -moz-max-content;    /* Firefox/Gecko */
   width: fit-content;
   margin: auto; 
-  margin-top: 5%;
-  padding: 1.5rem;
+  margin-top: 15vmin;
+  padding: 3vmin;
   position: relative;
+  font-size: 3vmin;
+
 }
 
 .popup-child >* {
   display: block;
+  font-size: 1em;
+  padding: .1em;
+}
+
+#percentRange {
+  width: 100%;
+  margin: .5em -.1em;
+}
+
+#percentLabel {
+  text-align: center;
+}
+
+.popup-child button{
+  margin: auto;
+  margin-top: .5em;
 }
 
 .exit-button{
   position: absolute;
   top: .5rem;
   right: .5rem;  
+  height: 1.5em;
+  width: 1.5em;
 }
 
 #book-container{
@@ -113,10 +135,14 @@ header{
 }
 
 .add-botton{
-  font-size: xx-large;
+  font-size: x-large;
   align-items: center;
   cursor: pointer;
   padding: 0;
+}
+
+.add-botton:hover{
+  background-color: #8b8b8b; 
 }
 
 .title, .author, .page  {
